@@ -1,0 +1,498 @@
+@charset "UTF-8";
+
+/* 文字フォントの種類 */
+$base-font:  "Baloo Bhai 2", "Kosugi Maru",  "Noto Sans JP", sans-serif;
+
+/* 色 */
+$background-color: #F5F3ED;
+$white: #fff;
+$black: #2E0E0E;
+$red: #F53A20;
+$pink: #EE856F;
+$green: #6DB149;
+$spink: #F1F1F1;
+
+body {
+  background-color: $background-color;
+  max-width: 1440px; 
+  margin: 0 auto; 
+} 
+
+/*========= メニューバー ===============*/
+/* リセットCSS */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/*=========== ボタン ===============*/
+.openbtn1 {
+  position:fixed;
+  z-index: 5;/*ボタンを最前面に*/
+  transform: translateY(200px);
+  right: 16px;
+  cursor: pointer;
+  width: 125px;
+  height: 125px;
+  -webkit-appearance: none;
+  appearance: none;
+  vertical-align: middle;
+  background: transparent;
+  outline: 0;
+  border-radius: 0;
+  text-align: inherit;
+  justify-content: center; 
+  align-items: center;
+  z-index: 10;
+  border-top-left-radius: 100px 100px; /* 左上の角を丸める */
+  border-bottom-left-radius: 100px 100px; /* 左下の角を丸める */  
+  background-color: $white;
+  border: none; /* ボーダーをなしに */
+}
+.openbtn1 span{
+    display: inline-block;
+    transition: all .4s;
+    position: absolute;
+    width: 70px;
+    height: 3px;
+    border-radius: 2px;
+    background-color: $pink;
+    right: 16px;
+    transform: translateY(55px);
+}
+.openbtn1 span:nth-of-type(1) {
+  top: 0; 
+}
+.openbtn1 span:nth-of-type(2) {
+  top: 13px;
+}
+.openbtn1 span:nth-of-type(3) {
+  top: 26px;
+}
+.openbtn1 span:nth-of-type(1)::before {
+  content:"メニュー";/*1つ目の要素のbeforeにメニュー表示を指定*/
+  position: absolute;
+  top: -20px; /* ボタンの上部から-10pxの位置に */
+  right: 10px;
+  transform: translateY(-10px);
+  width: max-content; 
+  color: $pink;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* ×に変化 */ 
+.openbtn1.active span:nth-of-type(1) {
+  transform: translateY(60px) rotate(-21.9deg); /*反時計回りに21.9度回転*/
+}
+.openbtn1.active span:nth-of-type(2) {
+  transform: translateY(48px) rotate(21.9deg); /*時計回りに21.9度回転*/
+}
+.openbtn1.active span:nth-of-type(3){
+  opacity: 0;
+}
+.openbtn1.active span:nth-of-type(1)::before {
+  content:"メニュー";
+  transform: translateY(-30px) translateX(32px)  rotate(21.9deg);
+  top: -150%; 
+  right: 30px;
+}
+
+/*========= ハンバーガーボタン ===============*/
+#g-nav {
+  position:fixed;
+  background-color: $white;
+  /*position:fixed;にし、z-indexの数値を小さくして最背面へ*/
+  z-index: -1;
+  opacity: 0;/*はじめは透過0*/
+  /*ナビの位置と形状*/
+  top: 0;
+  width:100%;
+  height: 100vh;
+  /*動き*/
+  transition: all 0.3s;
+}
+#g-nav.panelactive{
+  background-color: rgba($pink, 0.5);
+  opacity: 1;
+  z-index:1;
+}
+#g-nav-list {
+  position: absolute;
+  z-index: 999;
+  top: 350px;
+  right: 20%;
+  width: 600px;
+	height: 782px;
+  border-radius: 40px;
+  background-color: $white;
+}
+#g-nav-list.panelactive {
+  top: 350px;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  z-index: 2;
+  overflow: auto;
+    -webkit-overflow-scrolling: touch; 
+  border: none; /* ボーダーをなしに */
+}
+#g-nav.panelactive ul {
+  display: block;
+}
+
+/*リストのレイアウト設定*/
+
+#g-nav a {
+  text-decoration: none;
+  color: $black;
+}
+#g-nav li{
+list-style: none; 
+}
+
+/* メニューが非表示の場合 */
+#g-nav .hidden {
+  left: calc(-100% + 89px - 15%);
+}
+#g-nav .g-nav-list1 {
+  width: 189px;
+  height: 190px;
+  cursor: pointer;
+  text-align: center;
+  font-family: "Noto Sans JP";
+  font-weight: 400;
+  font-size: 22px;
+}
+#g-nav .arrow {
+  margin-left: 10px;
+  color: $pink;
+}
+#g-nav .g-nav-list1_1 {
+  padding: 5px 0;
+  margin-top: 60px;
+  transform: translateX(220px);
+}
+#g-nav .g-nav-list1_2 {
+  padding: 5px 0;
+  margin-top: 30px;
+  transform: translateX(180px);
+}
+#g-nav .g-nav-list1_3 {
+  padding: 5px 0;
+  margin-top: 30px;
+  transform: translateX(210px);
+}
+#g-nav .dotted-border {
+  justify-content: space-evenly;
+  width: fit-content;
+  border-bottom: 5px dotted $pink;
+  margin-bottom: 40px;
+}
+
+#g-nav .g-nav-list2 {
+  list-style: none;
+  margin-top: 80px;
+  font-family: "Noto Sans JP";
+  font-weight: bold;
+}
+
+#g-nav img {
+  margin: 25px;
+  width: 36px;
+  height: 36px;
+  display: block;
+  align-items: center;
+}
+#g-nav .g-nav-list2 li {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+}
+#g-nav .g-nav-list2-item {
+  border: 1px solid $spink;
+  padding: 0;
+  margin: 5px 0;
+  background-color: $spink;
+  width: 524px;
+  height: 120px;
+  border-radius: 12px;
+  color: $white;
+}
+#g-nav .g-nav-list2-item1 {
+  border: 1px solid $spink;
+  padding: 0;
+  margin: 5px 0;
+  background-color: $spink;
+  width: 524px;
+  height: 120px;
+  border-radius: 12px;
+}
+#g-nav .info {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+#g-nav .phone-number {
+  padding-left: 100px;
+}
+#g-nav .g-nav-list2-item-list {
+  border: 1px solid $green;
+  padding: 0;
+  margin: 5px 0;
+  background-color: $green;
+  width: 524px;
+  height: 120px;
+  border-radius: 12px;
+}
+#g-nav .g-nav-list2-item,
+.g-nav-list2-item-list:hover {
+  transition: .5s;
+  cursor: pointer;
+}
+#g-nav .arrow_arrow {
+  margin-left: 180px;
+  color: $white;
+}
+
+/**************** ここまで、メニューのスタイリング ****************/
+
+/**************** ここから、内容のスタイリング ****************/
+.contact-form {
+  width: 100%; 
+  max-width: 1440px; 
+  margin: 0 auto; 
+  text-align: center;
+  margin-bottom: 80px;
+}
+.title {
+  font-family: "Kosugi Maru"; 
+  margin: 0;
+  letter-spacing: 10px;
+  margin-top: 100px;
+  margin-bottom: 200px;
+  display: inline-block; 
+  margin-right: 20px; 
+}
+.format_title {
+  font-size: 46px;
+  color: $black;
+  margin-top: 0;
+}
+.sub_title {
+  font-family: "Baloo Bhai 2";
+  font-size: 24px;
+  font-weight: bolder;
+  color: $pink;
+}
+h2 {
+  font-family: "Kosugi Maru";
+  font-size: 30px; 
+  font-weight: lighter;
+  color: $black;
+  margin-bottom: 24px;
+  letter-spacing: 10px;
+}
+/* 点線 */
+.border-dotted {
+  display: grid; 
+  align-items: center; 
+  text-align: center;
+  justify-content: space-evenly;
+  width: 114px; 
+  border-bottom: 5px dotted #F53A20;
+  margin: auto; 
+  margin-bottom: 20px;
+}
+.instruction {
+  width: max-content;
+}
+.Logo {
+  margin-top: 40px;
+  margin-left: 40px;
+  width: 133px;
+  height: 121px;
+}
+.Enrollment {
+  display: flex; 
+  justify-content: center; 
+}
+.fee {
+  margin: 10px 0;
+  color: $pink;
+  font-size: 30px;
+  font-family: "Kosugi Maru"; 
+}
+.content {
+  font-family: "Noto Sans JP";
+  font-size: 18px;
+  margin: 40px;
+}
+.section1, .section2 {
+  border: 1px solid $black; 
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  width: calc(50% - 20px);
+  background: $white;
+  width: 420px;
+}
+.section2 {
+  margin-left: 20px; 
+}
+.Flow {
+  text-align: center;
+  margin-top: 100px;
+}
+
+
+@media screen and (max-width: 480px) {
+  .openbtn1 {
+    width: 15%;
+    height: 5%;
+    top: 90px;
+  }
+  .openbtn1 span:nth-of-type(1)::before {
+    top: -10px;
+    right: 5px; 
+    transform: translateY(-10px);
+    font-size: 8px;
+  }
+  .openbtn1 span { 
+    position: absolute;
+    right: 10px;
+    width: 45px;
+    height: 3px;
+    transform: translateY(25px);
+    /* バーガー線の色 */
+    background-color: $pink;
+    transition: .5s;
+  }
+  .openbtn1 .active span:nth-of-type(1) {
+    transform: translateY(10px) rotate(-21.9deg); 
+  }
+  .openbtn1 .active span:nth-of-type(2) {
+    transform: translateY(3px) translateX(0) rotate(21.9deg); 
+  }
+  .openbtn1 .active span:nth-of-type(3) {  
+    display: none; 
+  }
+  .openbtn1 .active span:nth-of-type(1)::before {
+    content:"メニュー";
+    transform: translateY(-20px) translateX(35px)  rotate(21.9deg);
+    right: 30px;
+  }
+
+  #g-nav {
+    width: 480px;
+    top: 0;
+  }
+  #g-nav.open {
+    transform: translateX(0);
+  }
+  #g-nav-content .hidden {
+    left: -100%;
+    right: auto; 
+  }
+
+  #g-nav-list.panelactive {
+   right: inherit;
+  }
+  .g-nav-list {
+    height: 152px;
+    padding: 0;
+    font-size: 18px;
+  }
+  .menu-list_1 {
+    padding: 5px 0;
+    margin-top: 60px;
+    transform: translateX(220px);
+  }
+  .menu-list_2,
+  .menu-list_3 {
+    margin-top: 20px;
+  }
+  /* メニュー点線 */
+  .dotted-border {
+	margin-bottom: 10px; 
+  }
+
+  .menu_menu {
+  margin-top: 60px;
+  }
+  .menu_menu li {
+  margin-top: 16px;
+  }
+  .menu-item,
+  .menu-item_list-list {
+    width: 400px;
+    height: 80px;
+    font-size: 18px;
+  }
+  .additional-info .info {
+    font-size: 10px;
+  }
+  .phone-number {
+    padding-left: 20px;
+    font-size: 16px; 
+  }
+  .arrow_arrow {
+    margin-left: 60px; 
+  }
+  .menu_menu img {
+    margin-left: 15px;
+    width: 24px;
+    height: 24px;
+  }
+  
+ 
+  .contact-form {
+    width: 90%; 
+  }
+
+  .Logo {
+    width: 20%;
+    height: 20%;
+  }
+
+  .sub_title {
+    font-size: 14px;
+    letter-spacing: 4px;
+  }
+
+  .format_title {
+    font-size: 24px;
+    letter-spacing: 6px;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 20px;
+    letter-spacing: 4px;
+    font-weight: lighter;
+    color: $black;
+    margin-bottom: 10px;
+  }
+
+  .border-dotted {
+    display: grid; 
+    align-items: center; 
+    text-align: center;
+    justify-content: space-evenly;
+    width: 77px; 
+  }
+   
+  .content {
+    font-size: 12px;
+    font-weight: lighter;
+  }
+  .section1, .section2 {
+    margin-left: 0; 
+  }
+} 
